@@ -1,4 +1,4 @@
-const Token = require( '../src/rtf/Token' );
+const Token = require( '../../src/rtf/Token' );
 
 describe( 'Token', () => {
 	class TokenSubclass extends Token {

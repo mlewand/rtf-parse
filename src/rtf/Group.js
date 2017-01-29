@@ -3,7 +3,12 @@
 
 	const Token = require( './Token' );
 
-	class Group extends Token {}
+	class Group extends Token {
+		constructor() {
+			super();
+			this.tokenRegexp = /^\{/;
+		}
+	}
 
 	module.exports = Group;
 } )();
