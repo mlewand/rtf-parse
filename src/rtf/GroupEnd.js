@@ -6,7 +6,7 @@
 	class GroupEnd extends Token {
 		constructor() {
 			super();
-			this.tokenRegexp = /^\}/;
+			this.tokenRegexp = /\}/;
 		}
 	}
 

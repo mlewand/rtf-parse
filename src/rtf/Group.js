@@ -6,7 +6,7 @@
 	class Group extends Token {
 		constructor() {
 			super();
-			this.tokenRegexp = /^\{/;
+			this.tokenRegexp = /\{/;
 		}
 	}
 

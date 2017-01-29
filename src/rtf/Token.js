@@ -13,10 +13,14 @@
 		}
 
 		/**
-		 * Checks if Token occurs at the beginning of `code`
+		 * Checks if Token occurs in the given `code`.
+		 *
+		 * 		// Assuming groupOpenToken matches "{" character.
+		 *		groupOpenToken.match( 'foo {\bar baz} {\bom}' );
+		 *		// Evaluates to [ 4, '{' ]
 		 *
 		 * @param {String} code
-		 * @returns {Boolean}
+		 * @returns {Array/Boolean} `false` if token was not matched.
 		 * @memberOf Token
 		 */
 		match( code ) {
@@ -24,9 +28,11 @@
 				throw new EvalError( 'Missing tokenRegexp property!' );
 			}
 
-			let match = String( code ).match( this.tokenRegexp );
+			code = String( code );
 
-			return match ? code.startsWith( match[ 0 ] ) : false;
+			let match = this.tokenRegexp.exec( code );
+
+			return match ? [ match.index, match[ 0 ] ] : false;
 		}
 	}
 
