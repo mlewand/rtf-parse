@@ -1,8 +1,8 @@
 
+// Main for all tests utilities.
+
 global.path = require( 'path' );
 global.expect = require( 'chai' ).expect;
-
-// // Main file with chai and other lib configuration.
 
 // require( 'chai' ).use( require( 'sinon-chai' ) );
 // require( 'chai' ).use( require( 'chai-as-promised' ) );
