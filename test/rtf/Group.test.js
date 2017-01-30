@@ -11,12 +11,16 @@ describe( 'Group', () => {
 	} );
 
 	describe( 'match', () => {
-		it( 'matches regular group string', () => {
-			expect( mock.match( '{{\*\generator Sample Rich Text Editor}\viewkind4 \pard Hello world!\par}' ) ).to.be.true;
+		it( 'matches regular group string at the beginning', () => {
+			expect( mock.match( '{{\*\generator Sample Rich Text Editor}\viewkind4 \pard Hello world!\par}' ) ).to.be.eql( [ 0, '{' ] );
 		} );
 
-		it( 'doesnt match escaped', () => {
-			expect( mock.match( '\\{{\*\generator Sample Rich Text Editor}\viewkind4 \pard Hello world!\par}' ) ).to.be.false;
+		it( 'matches regular group string', () => {
+			expect( mock.match( 'foo {{\*\generator Sample Rich Text Editor}\viewkind4 \pard Hello world!\par}' ) ).to.be.eql( [ 4, '{' ] );
+		} );
+
+		it( 'doesnt match regular text', () => {
+			expect( mock.match( 'foo' ) ).to.be.false;
 		} );
 	} );
 } );

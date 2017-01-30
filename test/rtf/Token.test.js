@@ -4,7 +4,7 @@ describe( 'Token', () => {
 	class TokenSubclass extends Token {
 		constructor() {
 			super();
-			this.tokenRegexp = /^abc/;
+			this.tokenRegexp = /abc/;
 		}
 	}
 
@@ -19,9 +19,10 @@ describe( 'Token', () => {
 		} );
 
 		it( 'matches correctly with valid regexp', () => {
-			expect( new TokenSubclass().match( 'abcde' ) ).to.be.true;
+			expect( new TokenSubclass().match( 'abcde' ) ).to.be.eql( [ 0, 'abc' ] );
+			expect( new TokenSubclass().match( 'aaabc' ) ).to.be.eql( [ 2, 'abc' ] );
 			expect( new TokenSubclass().match( 'foobar' ) ).to.be.false;
-			expect( new TokenSubclass().match( ' abcde' ) ).to.be.false;
+			expect( new TokenSubclass().match( ' abcde' ) ).to.be.eql( [ 1, 'abc' ] );
 		} );
 	} );
 

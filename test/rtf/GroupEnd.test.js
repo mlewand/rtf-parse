@@ -11,16 +11,16 @@ describe( 'GroupEnd', () => {
 	} );
 
 	describe( 'match', () => {
-		it( 'matches regular group end string', () => {
-			expect( mock.match( '}\viewkind4 \pard Hello world!\par}' ) ).to.be.true;
+		it( 'matches regular group on the end of string', () => {
+			expect( mock.match( '\\viewkind4 \\pard Hello world!\\par}' ) ).to.be.eql( [ 33, '}' ] );
 		} );
 
-		it( 'doesnt match escaped', () => {
-			expect( mock.match( '\\}\viewkind4 \pard Hello world!\par}' ) ).to.be.false;
+		it( 'matches group end on the beginning of the string', () => {
+			expect( mock.match( '} foo bar' ) ).to.be.eql( [ 0, '}' ] );
 		} );
 
 		it( 'doesnt match regular text', () => {
-			expect( mock.match( 'Hello world!\par}' ) ).to.be.false;
+			expect( mock.match( 'Hello world!\par' ) ).to.be.false;
 		} );
 	} );
 } );
