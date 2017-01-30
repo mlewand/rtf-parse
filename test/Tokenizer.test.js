@@ -14,11 +14,4 @@ describe( 'Tokenizer', () => {
 			expect( str.split( mock.splitRegExp ) ).to.be.eql( [ 'foo bar', 'baz', '', 'boom' ] );
 		} );
 	} );
-
-
-	describe('process', () => {
-		it('returns a valid value', () => {
-			mock.process( '{\rtf1 foobar}' );
-		});
-	});
 } );
