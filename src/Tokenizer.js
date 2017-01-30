@@ -53,6 +53,9 @@
 					matchedText = matchIndex !== null ? chunk.substring( 0, matchIndex ) : chunk;
 					closestMatch = new Text( matchedText );
 					matchIndex = 0;
+				} else {
+					// @todo: until there's no difference between token and model, we need to use the following.
+					closestMatch = new closestMatch.constructor( matchedText );
 				}
 
 				// Update current chunk.
@@ -89,11 +92,13 @@
 		 */
 		_loadTokens() {
 			const Group = require( './rtf/Group' ),
-				GroupEnd = require( './rtf/GroupEnd' );
+				GroupEnd = require( './rtf/GroupEnd' ),
+				Command = require( './rtf/Command' );
 
 			this.tokens = [
 				new Group(),
-				new GroupEnd()
+				new GroupEnd(),
+				new Command()
 			];
 
 			this.tokens[ 0 ].name = 'Group';

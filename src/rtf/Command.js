@@ -4,9 +4,11 @@
 	const Token = require( './Token' );
 
 	class Command extends Token {
-		constructor() {
+		constructor( value ) {
 			super();
 			this.tokenRegexp = /\\[a-z]+(-?[0-9]+)? ?/;
+
+			this.value = value;
 		}
 	}
 
