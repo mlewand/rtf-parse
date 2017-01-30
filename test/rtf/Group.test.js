@@ -18,5 +18,9 @@ describe( 'Group', () => {
 		it( 'matches regular group string', () => {
 			expect( mock.match( 'foo {{\*\generator Sample Rich Text Editor}\viewkind4 \pard Hello world!\par}' ) ).to.be.eql( [ 4, '{' ] );
 		} );
+
+		it( 'doesnt match regular text', () => {
+			expect( mock.match( 'foo' ) ).to.be.false;
+		} );
 	} );
 } );
