@@ -93,13 +93,17 @@
 		_loadTokens() {
 			const Group = require( './rtf/Group' ),
 				GroupEnd = require( './rtf/GroupEnd' ),
-				Command = require( './rtf/Command' );
+				Command = require( './rtf/Command' ),
+				Escape = require( './rtf/Escape' );
 
 			this.tokens = [
 				new Group(),
 				new GroupEnd(),
 				new Command()
 			];
+
+			// It's important to put Escape token at the end as it's the last one that should be used.
+			this.tokens.push( new Escape() );
 
 			this.tokens[ 0 ].name = 'Group';
 			this.tokens[ 1 ].name = 'GroupEnd';
