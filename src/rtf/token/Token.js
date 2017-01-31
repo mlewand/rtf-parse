@@ -43,7 +43,7 @@
 		 * @memberOf Token
 		 */
 		apply( model ) {
-			throw new EvalError( 'Not implemented!' );
+			throw new Error( 'Method not implemented!' );
 		}
 	}
 
