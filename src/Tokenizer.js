@@ -8,8 +8,7 @@
 
 		constructor() {
 			super();
-			// this.splitRegExp = new RegExp( Tokenizer.RTF_NEW_LINE, 'm' );
-			this.splitRegExp = /\r\n/m;
+			this.splitRegExp = new RegExp( Tokenizer.RTF_NEW_LINE, 'm' );
 			this._loadTokens();
 		}
 
