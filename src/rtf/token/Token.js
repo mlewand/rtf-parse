@@ -42,7 +42,7 @@
 		 * @returns {Model/null} If Model instance is returned it means that the parser should change context to the returned instance.
 		 * @memberOf Token
 		 */
-		apply( model ) {
+		applyToModel( model ) {
 			throw new Error( 'Method not implemented!' );
 		}
 	}
