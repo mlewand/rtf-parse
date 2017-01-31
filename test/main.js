@@ -4,14 +4,13 @@
 global.path = require( 'path' );
 global.expect = require( 'chai' ).expect;
 
-// require( 'chai' ).use( require( 'sinon-chai' ) );
+require( 'chai' ).use( require( 'sinon-chai' ) );
 // require( 'chai' ).use( require( 'chai-as-promised' ) );
 // require( 'chai' ).use( require( 'chai-fs' ) );
 
 // require('isomorphic-fetch');
 
-// global.path = require( 'path' );
-// global.sinon = require( 'sinon' );
+global.sinon = require( 'sinon' );
 // global.proxyquire = require( 'proxyquire' );
 // global.expect = require( 'chai' ).expect;
 // global._ = require( 'lodash' );

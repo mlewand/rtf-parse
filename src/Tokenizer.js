@@ -1,16 +1,20 @@
 ( function() {
 	'use strict';
 
-	const Text = require( './rtf/Text' );
+	const Text = require( './rtf/Text' ),
+		EventEmitter = require( 'events' );
 
-	class Tokenizer {
+	class Tokenizer extends EventEmitter {
 
 		constructor() {
+			super();
 			// this.splitRegExp = new RegExp( Tokenizer.RTF_NEW_LINE, 'm' );
 			this.splitRegExp = /\r\n/m;
 			this._loadTokens();
 
 			this._results = [];
+
+			this.on( 'matched', token => this._results.push( token ) );
 		}
 
 		process( code ) {
@@ -61,17 +65,12 @@
 				// Update current chunk.
 				chunk = chunk.substr( matchedText.length );
 
-				this._onMatched( closestMatch );
+				this.emit( 'matched', closestMatch );
 			}
 
 			if ( remaining && remaining.length ) {
 				this.process( remaining );
 			}
-		}
-
-		_onMatched( token ) {
-			// console.log( `@@ Matched ${token.constructor.name} !!` );
-			this._results.push( token );
 		}
 
 		/**

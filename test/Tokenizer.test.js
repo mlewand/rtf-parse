@@ -14,4 +14,14 @@ describe( 'Tokenizer', () => {
 			expect( str.split( mock.splitRegExp ) ).to.be.eql( [ 'foo bar', 'baz', '', 'boom' ] );
 		} );
 	} );
+
+	describe( 'process', () => {
+		it( 'fires matched event', () => {
+			let spy = sinon.spy();
+			mock.on( 'matched', spy );
+			mock.process( '{\\rtf1 foobar}' );
+
+			expect(spy).to.be.called;
+		} );
+	} );
 } );
