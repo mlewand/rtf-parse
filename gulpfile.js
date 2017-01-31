@@ -38,7 +38,7 @@ gulp.task( 'test', [ 'pre-test' ], function( cb ) {
 	gulp.src( 'test/**/*.test.js' )
 		.pipe( plumber() )
 		.pipe( mocha( {
-			reporter: 'min',
+			reporter: 'spec',
 			require: [ './test/main.js' ]
 		} ) )
 		.on( 'error', function( err ) {
