@@ -1,4 +1,5 @@
-const Tokenizer = require( '../src/Tokenizer' ),
+const fsp = require( 'fs-promise' ),
+	Tokenizer = require( '../src/Tokenizer' ),
 	GroupToken = require( '../src/rtf/Group' ),
 	GroupEndToken = require( '../src/rtf/GroupEnd' ),
 	CommandToken = require( '../src/rtf/Command' ),
@@ -80,5 +81,13 @@ describe( 'Tokenizer integration', () => {
 			], ret );
 		} );
 
+		it( 'doesnt crash with real rtfs', () => {
+			return fsp.readFile( path.join( __dirname, '_fixtures', 'smallimage.rtf' ) )
+				.then( content => mock.process( content ) )
+				.then( () => {
+					// Nothing crashed, yaaayy. Just make sure that some tokens were actually read.
+					expect( mock._results.length ).not.to.be.eql( 0 );
+				} );
+		} );
 	} );
 } );
