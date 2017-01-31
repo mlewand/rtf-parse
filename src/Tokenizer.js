@@ -103,9 +103,6 @@
 
 			// It's important to put Escape token at the end as it's the last one that should be used.
 			this.tokens.push( new Escape() );
-
-			this.tokens[ 0 ].name = 'Group';
-			this.tokens[ 1 ].name = 'GroupEnd';
 		}
 	}
 
