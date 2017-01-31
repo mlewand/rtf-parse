@@ -21,7 +21,7 @@ describe( 'Tokenizer', () => {
 			mock.on( 'matched', spy );
 			mock.process( '{\\rtf1 foobar}' );
 
-			expect(spy).to.be.called;
+			expect( spy ).to.be.called;
 		} );
 	} );
 } );
