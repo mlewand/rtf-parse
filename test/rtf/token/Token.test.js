@@ -10,9 +10,6 @@ describe( 'Token', () => {
 
 	class NoRegexpToken extends Token {}
 
-	describe( 'constructor', () => {
-	} );
-
 	describe( 'match', () => {
 		it( 'throw an error if no tokenRegexp is provided', () => {
 			expect( () => new NoRegexpToken().match( 'abcde' ) ).to.throw( EvalError, 'Missing tokenRegexp' );
