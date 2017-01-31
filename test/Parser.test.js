@@ -1,6 +1,5 @@
 const fsp = require( 'fs-promise' ),
-	Parser = require( '../src/Parser' ),
-	Document = require( '../src/rtf/Document' );
+	Parser = require( '../src/Parser' );
 
 describe( 'Parser', () => {
 	let parserMock = new Parser();
