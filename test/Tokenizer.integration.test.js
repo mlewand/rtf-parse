@@ -1,10 +1,10 @@
 const fsp = require( 'fs-promise' ),
 	Tokenizer = require( '../src/Tokenizer' ),
-	GroupToken = require( '../src/rtf/Group' ),
-	GroupEndToken = require( '../src/rtf/GroupEnd' ),
-	CommandToken = require( '../src/rtf/Command' ),
-	TextToken = require( '../src/rtf/Text' ),
-	EscapeToken = require( '../src/rtf/Escape' );
+	GroupToken = require( '../src/rtf/token/Group' ),
+	GroupEndToken = require( '../src/rtf/token/GroupEnd' ),
+	CommandToken = require( '../src/rtf/token/Command' ),
+	TextToken = require( '../src/rtf/token/Text' ),
+	EscapeToken = require( '../src/rtf/token/Escape' );
 
 describe( 'Tokenizer integration', () => {
 	let mock;

@@ -1,4 +1,4 @@
-const Group = require( '../../src/rtf/Group' );
+const Group = require( '../../../src/rtf/token/Group' );
 
 describe( 'Group', () => {
 	let mock = new Group();

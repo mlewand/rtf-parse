@@ -1,4 +1,4 @@
-const Command = require( '../../src/rtf/Command' );
+const Command = require( '../../../src/rtf/token/Command' );
 
 describe( 'Command', () => {
 	let mock = new Command();
