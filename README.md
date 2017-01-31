@@ -1,4 +1,5 @@
-# rtf-parse [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# rtf-parse
+
 > A simplified RTF parser.
 
 ## Installation
