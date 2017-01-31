@@ -23,4 +23,27 @@ describe( 'Group', () => {
 			expect( mock.match( 'foo' ) ).to.be.false;
 		} );
 	} );
+
+
+	describe( 'applyToModel', () => {
+		let fakeModel;
+
+		const GroupModel = require( '../../../src/rtf/model/Group' );
+
+		beforeEach( () => {
+			fakeModel = {
+				append: sinon.stub()
+			};
+		} );
+
+		it( 'adds a new group context', () => {
+			mock.applyToModel( fakeModel );
+			expect( fakeModel.append ).to.be.calledWith( sinon.match.instanceOf( GroupModel ) );
+		} );
+
+		it( 'changes the context', () => {
+			let ret = mock.applyToModel( fakeModel );
+			expect( ret ).to.be.instanceOf( GroupModel );
+		} );
+	} );
 } );
