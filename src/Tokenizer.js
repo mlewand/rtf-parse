@@ -1,7 +1,7 @@
 ( function() {
 	'use strict';
 
-	const Text = require( './rtf/Text' ),
+	const Text = require( './rtf/token/Text' ),
 		EventEmitter = require( 'events' );
 
 	class Tokenizer extends EventEmitter {
@@ -90,10 +90,10 @@
 		 * @memberOf Tokenizer
 		 */
 		_loadTokens() {
-			const Group = require( './rtf/Group' ),
-				GroupEnd = require( './rtf/GroupEnd' ),
-				Command = require( './rtf/Command' ),
-				Escape = require( './rtf/Escape' );
+			const Group = require( './rtf/token/Group' ),
+				GroupEnd = require( './rtf/token/GroupEnd' ),
+				Command = require( './rtf/token/Command' ),
+				Escape = require( './rtf/token/Escape' );
 
 			this.tokens = [
 				new Group(),

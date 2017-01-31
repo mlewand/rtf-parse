@@ -1,4 +1,4 @@
-const GroupEnd = require( '../../src/rtf/GroupEnd' );
+const GroupEnd = require( '../../../src/rtf/token/GroupEnd' );
 
 describe( 'GroupEnd', () => {
 	let mock = new GroupEnd();
