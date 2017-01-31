@@ -42,9 +42,7 @@ describe( 'Tokenizer integration', () => {
 
 	describe( 'process', () => {
 		it( 'works with simple single-line markup', () => {
-			mock.process( '{\\rtf1 foobar}' );
-
-			let ret = mock._results;
+			let ret = mock.process( '{\\rtf1 foobar}' );
 
 			assertParsedTokens( [
 				GroupToken, [ CommandToken, '\\rtf1 ' ],
@@ -54,9 +52,7 @@ describe( 'Tokenizer integration', () => {
 		} );
 
 		it( 'works with multiline markup', () => {
-			mock.process( '{\\rtf1 foobar\r\n{abcd}}' );
-
-			let ret = mock._results;
+			let ret = mock.process( '{\\rtf1 foobar\r\n{abcd}}' );
 
 			assertParsedTokens( [
 				GroupToken, [ CommandToken, '\\rtf1 ' ],
@@ -68,9 +64,7 @@ describe( 'Tokenizer integration', () => {
 		} );
 
 		it( 'integrates well with escape tokens', () => {
-			mock.process( '{\\rtf1 foo\\}bar}' );
-
-			let ret = mock._results;
+			let ret = mock.process( '{\\rtf1 foo\\}bar}' );
 
 			assertParsedTokens( [
 				GroupToken, [ CommandToken, '\\rtf1 ' ],
@@ -84,9 +78,9 @@ describe( 'Tokenizer integration', () => {
 		it( 'doesnt crash with real rtfs', () => {
 			return fsp.readFile( path.join( __dirname, '_fixtures', 'smallimage.rtf' ) )
 				.then( content => mock.process( content ) )
-				.then( () => {
+				.then( results => {
 					// Nothing crashed, yaaayy. Just make sure that some tokens were actually read.
-					expect( mock._results.length ).not.to.be.eql( 0 );
+					expect( results.length ).not.to.be.eql( 0 );
 				} );
 		} );
 	} );

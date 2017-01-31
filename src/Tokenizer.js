@@ -11,19 +11,23 @@
 			// this.splitRegExp = new RegExp( Tokenizer.RTF_NEW_LINE, 'm' );
 			this.splitRegExp = /\r\n/m;
 			this._loadTokens();
-
-			this._results = [];
-
-			this.on( 'matched', token => this._results.push( token ) );
 		}
 
+		/**
+		 * Parses given RTF code and returns an array of tokens.
+		 *
+		 * @param {String} code RTF code to be parsed.
+		 * @returns {Token[]} An array of parsed tokens based on `code` provided.
+		 * @memberOf Tokenizer
+		 */
 		process( code ) {
 			code = String( code );
 
 			// Tokenizer splits RTF content into chunks per space / new line.
 			let separatorMatch = this.splitRegExp.exec( code ),
 				chunk = separatorMatch ? code.substr( 0, separatorMatch.index ) : code,
-				remaining = separatorMatch ? code.substr( separatorMatch.index + separatorMatch[ 0 ].length ) : null;
+				remaining = separatorMatch ? code.substr( separatorMatch.index + separatorMatch[ 0 ].length ) : null,
+				ret = [];
 
 			while ( chunk ) {
 				let closestMatch = null,
@@ -66,11 +70,14 @@
 				chunk = chunk.substr( matchedText.length );
 
 				this.emit( 'matched', closestMatch );
+				ret.push( closestMatch );
 			}
 
 			if ( remaining && remaining.length ) {
-				this.process( remaining );
+				ret = ret.concat( this.process( remaining ) );
 			}
+
+			return ret;
 		}
 
 		/**

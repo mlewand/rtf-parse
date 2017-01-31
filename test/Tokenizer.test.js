@@ -23,5 +23,10 @@ describe( 'Tokenizer', () => {
 
 			expect( spy ).to.be.called;
 		} );
+
+		it( 'returns an array', () => {
+			let ret = mock.process( '{\\rtf1 foobar}' );
+			expect( ret ).to.be.an( 'array' );
+		} );
 	} );
 } );
