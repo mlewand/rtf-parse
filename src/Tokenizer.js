@@ -29,51 +29,18 @@
 				ret = [];
 
 			while ( chunk ) {
-				let closestMatch = null,
-					matchedText = null,
-					// At what offset the token was matched?
-					matchIndex = null;
-
-				for ( let token of this.tokens ) {
-					let tokenMatched = token.match( chunk );
-
-					// Only overwrite closest match if:
-					// 1. No token has been matched so far.
-					// 2. ... or this token has been found closer to the end of a string than the former one.
-					if ( tokenMatched && ( matchIndex === null || tokenMatched[ 0 ] < matchIndex ) ) {
-						closestMatch = token;
-						matchIndex = tokenMatched[ 0 ];
-						matchedText = tokenMatched[ 1 ];
-					}
-
-					if ( matchIndex === 0 ) {
-						// Any token matched at 0 index, takes highest priority, and means no further processing is needed.
-						break;
-					}
-				}
-
-				if ( matchIndex !== 0 ) {
-					// console.log( `not having a perfect match (${matchIndex}) :(( using text` );
-
-					// No match perfect match, so we'll create a text run all the way until a best match. The best
-					// match will be picked in next iteration at offset 0.
-					matchedText = matchIndex !== null ? chunk.substring( 0, matchIndex ) : chunk;
-					closestMatch = new Text( matchedText );
-					matchIndex = 0;
-				} else {
-					// @todo: until there's no difference between token and model, we need to use the following.
-					closestMatch = new closestMatch.constructor( matchedText );
-				}
+				let [ matchedText, closestMatch ] = this._processChunk( chunk );
 
 				// Update current chunk.
 				chunk = chunk.substr( matchedText.length );
 
-				this.emit( 'matched', closestMatch );
 				ret.push( closestMatch );
-			}
 
-			if ( remaining && remaining.length ) {
-				ret = ret.concat( this.process( remaining ) );
+				if ( !chunk ) {
+					separatorMatch = this.splitRegExp.exec( remaining );
+					chunk = separatorMatch ? remaining.substr( 0, separatorMatch.index ) : remaining;
+					remaining = separatorMatch ? remaining.substr( separatorMatch.index + separatorMatch[ 0 ].length ) : null;
+				}
 			}
 
 			return ret;
@@ -88,6 +55,56 @@
 		 */
 		static get RTF_NEW_LINE() {
 			return '\r\n';
+		}
+
+		/**
+		 * Processes a single chunk of RTF code.
+		 *
+		 * @private
+		 * @param {String} chunk
+		 * @returns {Array} An array of: `[ matchedText:String, closestMatch:Token ]`.
+		 * @memberOf Tokenizer
+		 */
+		_processChunk( chunk ) {
+			let closestMatch = null,
+				matchedText = null,
+				// At what offset the token was matched?
+				matchIndex = null;
+
+			for ( let token of this.tokens ) {
+				let tokenMatched = token.match( chunk );
+
+				// Only overwrite closest match if:
+				// 1. No token has been matched so far.
+				// 2. ... or this token has been found closer to the end of a string than the former one.
+				if ( tokenMatched && ( matchIndex === null || tokenMatched[ 0 ] < matchIndex ) ) {
+					closestMatch = token;
+					matchIndex = tokenMatched[ 0 ];
+					matchedText = tokenMatched[ 1 ];
+				}
+
+				if ( matchIndex === 0 ) {
+					// Any token matched at 0 index, takes highest priority, and means no further processing is needed.
+					break;
+				}
+			}
+
+			if ( matchIndex !== 0 ) {
+				// console.log( `not having a perfect match (${matchIndex}) :(( using text` );
+
+				// No match perfect match, so we'll create a text run all the way until a best match. The best
+				// match will be picked in next iteration at offset 0.
+				matchedText = matchIndex !== null ? chunk.substring( 0, matchIndex ) : chunk;
+				closestMatch = new Text( matchedText );
+				matchIndex = 0;
+			} else {
+				// @todo: until there's no difference between token and model, we need to use the following.
+				closestMatch = new closestMatch.constructor( matchedText );
+			}
+
+			this.emit( 'matched', closestMatch );
+
+			return [ matchedText, closestMatch ];
 		}
 
 		/**
