@@ -27,6 +27,14 @@
 		setParent( parent ) {
 			this._parent = parent;
 		}
+
+		/**
+		 * @returns {Model/null} Returns last child of this item or `null` if none.
+		 * @memberOf Model
+		 */
+		getLast() {
+			return this.children[ this.children.length - 1 ] || null;
+		}
 	}
 
 	module.exports = Model;

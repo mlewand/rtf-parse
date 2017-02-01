@@ -29,9 +29,18 @@
 		}
 
 		applyToModel( model ) {
-			let text = new TextModel( model );
-			text.value = this.value;
-			model.append( text );
+			let lastModelChild = model.getLast(),
+				text;
+
+			if ( lastModelChild && lastModelChild instanceof TextModel ) {
+				// Current scope has already tailing text, we could merge it. (#6)
+				text = lastModelChild;
+			} else {
+				text = new TextModel( model );
+				model.append( text );
+			}
+
+			text.appendText( this.value );
 		}
 	}
 

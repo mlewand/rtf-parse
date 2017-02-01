@@ -30,4 +30,14 @@ describe( 'Parser integration', () => {
 				expect( nestedGroup.length, 'nestedGroup length' ).to.be.equal( 1 );
 			} );
 	} );
+
+	it( 'merges subsequent text entries', () => {
+		return parserMock.parseString( '{two \r\n lines}' )
+			.then( doc => {
+				let group = doc.children[ 0 ];
+				expect( group.children.length ).to.be.equal( 1 );
+				expect( group.children[ 0 ] ).to.be.instanceOf( TextModel );
+				expect( group.children[ 0 ].value ).to.be.equal( 'two  lines' );
+			} );
+	} );
 } );
