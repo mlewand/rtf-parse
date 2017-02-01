@@ -22,7 +22,6 @@ describe( 'Model', () => {
 
 	describe( 'append', () => {
 		let getChildMock = () => ({ setParent: sinon.stub() });
-		// let getChildMock = () => { return { setParent: sinon.stub() }; };
 
 		it( 'appends a child', () => {
 			let child1 = getChildMock(),
