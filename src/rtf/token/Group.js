@@ -11,7 +11,7 @@
 		}
 
 		applyToModel( model ) {
-			let group = new GroupModel();
+			let group = new GroupModel( model );
 			model.append( group );
 			return group;
 		}
