@@ -20,6 +20,8 @@
 
 		append( node ) {
 			this.children.push( node );
+
+			node.setParent( this );
 		}
 
 		setParent( parent ) {
