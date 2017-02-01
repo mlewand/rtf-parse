@@ -21,7 +21,9 @@ describe( 'Model', () => {
 	} );
 
 	describe( 'append', () => {
-		let getChildMock = () => ({ setParent: sinon.stub() });
+		let getChildMock = () => ( {
+			setParent: sinon.stub()
+		} );
 
 		it( 'appends a child', () => {
 			let child1 = getChildMock(),
@@ -51,4 +53,17 @@ describe( 'Model', () => {
 			expect( mock._parent ).to.be.equal( 2 );
 		} );
 	} );
+
+
+	describe( 'getLast', () => {
+		it( 'returns null if none available', () => {
+			expect( mock.getLast() ).to.be.null;
+		} );
+
+		it( 'returns last child', () => {
+			mock.children = [ 1, 2, 3 ];
+			expect( mock.getLast() ).to.be.equal( 3 );
+		} );
+	} );
+
 } );
