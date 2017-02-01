@@ -21,7 +21,8 @@ describe( 'Text', () => {
 
 		beforeEach( () => {
 			fakeModel = {
-				append: sinon.stub()
+				append: sinon.stub(),
+				getLast: sinon.stub()
 			};
 		} );
 
