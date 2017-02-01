@@ -9,6 +9,10 @@
 
 			this.value = '';
 		}
+
+		appendText( str ) {
+			this.value += str;
+		}
 	}
 
 	module.exports = Text;
