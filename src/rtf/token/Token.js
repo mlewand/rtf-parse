@@ -34,6 +34,17 @@
 
 			return match ? [ match.index, match[ 0 ] ] : false;
 		}
+
+		/**
+		 * Applies changes to current RTF model based on this token.
+		 *
+		 * @param {Model} model Current model context.
+		 * @returns {Model/null} If Model instance is returned it means that the parser should change context to the returned instance.
+		 * @memberOf Token
+		 */
+		applyToModel( model ) {
+			throw new Error( 'Method not implemented!' );
+		}
 	}
 
 	module.exports = Token;

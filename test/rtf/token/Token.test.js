@@ -23,4 +23,8 @@ describe( 'Token', () => {
 		} );
 	} );
 
+
+	describe( 'virtual methods', () => {
+		expect( () => Token.prototype.applyToModel.call( null ) ).to.throw( Error, 'Method not implemented!' );
+	} );
 } );

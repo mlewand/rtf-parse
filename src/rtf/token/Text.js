@@ -1,7 +1,8 @@
 ( function() {
 	'use strict';
 
-	const Token = require( './Token' );
+	const Token = require( './Token' ),
+		TextModel = require( '../model/Text' );
 
 	/**
 	 * Text Text.
@@ -25,6 +26,12 @@
 		match( code ) {
 			// Text always matches.
 			return true;
+		}
+
+		applyToModel( model ) {
+			let text = new TextModel( model );
+			text.value = this.value;
+			model.append( text );
 		}
 	}
 
