@@ -1,7 +1,8 @@
 ( function() {
 	'use strict';
 
-	const Token = require( './Token' );
+	const TextToken = require( './Text' ),
+		Token = require( './Token' );
 
 	/**
 	 * Escape token.
@@ -9,11 +10,15 @@
 	 * @class Escape
 	 * @extends {Token}
 	 */
-	class Escape extends Token {
+	class Escape extends TextToken {
 		constructor( value ) {
-			super();
+			super( value );
 			this.tokenRegexp = /\\./;
-			this.value = value;
+		}
+
+		match( code ) {
+			//return super.super.match( code );
+			return Token.prototype.match.call( this, code );
 		}
 	}
 
