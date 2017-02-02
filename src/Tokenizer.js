@@ -20,27 +20,26 @@
 		 * @memberOf Tokenizer
 		 */
 		process( code ) {
-			code = String( code );
-
-			// Tokenizer splits RTF content into chunks per space / new line.
-			let separatorMatch = this.splitRegExp.exec( code ),
-				chunk = separatorMatch ? code.substr( 0, separatorMatch.index ) : code,
-				remaining = separatorMatch ? code.substr( separatorMatch.index + separatorMatch[ 0 ].length ) : null,
+			let remaining = String( code ),
+				separatorMatch = null,
+				chunk = null,
 				ret = [];
 
-			while ( chunk ) {
-				let [ matchedText, closestMatch ] = this._processChunk( chunk );
-
-				// Update current chunk.
-				chunk = chunk.substr( matchedText.length );
-
-				ret.push( closestMatch );
-
+			// Tokenizer splits RTF content into chunks per space / new line.
+			while ( chunk || remaining ) {
 				if ( !chunk ) {
+					// Current chunk has been processed, get a new one.
 					separatorMatch = this.splitRegExp.exec( remaining );
 					chunk = separatorMatch ? remaining.substr( 0, separatorMatch.index ) : remaining;
 					remaining = separatorMatch ? remaining.substr( separatorMatch.index + separatorMatch[ 0 ].length ) : null;
 				}
+
+				let [ matchedText, matchedToken ] = this._processChunk( chunk );
+
+				// Update current chunk.
+				chunk = chunk.substr( matchedText.length );
+
+				ret.push( matchedToken );
 			}
 
 			return ret;
