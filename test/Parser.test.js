@@ -4,14 +4,15 @@ const fsp = require( 'fs-promise' ),
 	GroupModel = require( '../src/rtf/model/Group' );
 
 describe( 'Parser', () => {
-	let parserMock;
+	let simpleFixturePath = path.join( __dirname, '_fixtures', 'rtfSimple.rtf' ),
+		parserMock;
 
 	beforeEach( () => {
 		parserMock = new Parser();
 	} );
 
 	describe( 'parseString', () => {
-		let readSimpleRtf = () => fsp.readFile( path.join( __dirname, '_fixtures', 'rtfSimple.rtf' ), {
+		let readSimpleRtf = () => fsp.readFile( simpleFixturePath, {
 			encoding: 'utf8'
 		} );
 
@@ -53,5 +54,24 @@ describe( 'Parser', () => {
 					expect( listener ).not.to.be.called;
 				} );
 		} );
+	} );
+
+	it( 'returns a promise', () => {
+		expect( parserMock.parseFile( simpleFixturePath ) ).to.be.instanceof( Promise );
+	} );
+
+	it( 'resolves simple rtf', () => {
+		let parseStringSpy = sinon.spy( parserMock, 'parseString' );
+
+		return parserMock.parseFile( simpleFixturePath )
+			.then( doc => {
+				expect( doc ).to.be.instanceof( DocumentModel );
+				expect( parseStringSpy ).to.be.called;
+				parseStringSpy.restore();
+			} )
+			.catch( err => {
+				parseStringSpy.restore();
+				throw err;
+			 } );
 	} );
 } );
