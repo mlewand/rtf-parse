@@ -1,6 +1,9 @@
 const Model = require( '../../../src/rtf/model/Model' );
 
 describe( 'Model', () => {
+	class ModelA extends Model {};
+	class ModelB extends Model {};
+
 	let mock;
 
 	beforeEach( () => {
@@ -54,7 +57,6 @@ describe( 'Model', () => {
 		} );
 	} );
 
-
 	describe( 'getLast', () => {
 		it( 'returns null if none available', () => {
 			expect( mock.getLast() ).to.be.null;
@@ -66,4 +68,32 @@ describe( 'Model', () => {
 		} );
 	} );
 
+
+	describe( 'getChild', () => {
+		let a = new ModelA(),
+			b = new ModelB(),
+			b2 = new ModelB();
+		b2.foo = true;
+
+		beforeEach( () => {
+			mock.append( a );
+			mock.append( b );
+			mock.append( b2 );
+		} );
+
+		it( 'returns first child when no criteria is given', () => {
+			console.log( '---' );
+			console.log( a );
+			expect( mock.getChild() ).to.be.equal( a );
+		} );
+
+		it( 'returns correct val when no children available', () => {
+			let emptyMock = new Model();
+			expect( emptyMock.getChild() ).to.be.null;
+		} );
+
+		it( 'returns a correct val with a given type', () => {
+			expect( mock.getChild( ModelB ) ).to.be.eql( b );
+		} );
+	} );
 } );

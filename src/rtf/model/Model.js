@@ -1,6 +1,8 @@
 ( function() {
 	'use strict';
 
+	let isClass = require( 'is-class' );
+
 	/**
 	 * Base class for RTF model entries.
 	 *
@@ -34,6 +36,19 @@
 		 */
 		getLast() {
 			return this.children[ this.children.length - 1 ] || null;
+		}
+
+		getChild( criteria ) {
+			let ret = null,
+				evaluator;
+
+			if ( !criteria ) {
+				evaluator = () => true;
+			} else if ( isClass( criteria ) ) {
+				evaluator = val => val instanceof criteria;
+			}
+
+			return this.children.find( evaluator ) || null;
 		}
 	}
 
