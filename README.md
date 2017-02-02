@@ -21,10 +21,9 @@ rtfParse.parseFile( path.join( '_fixtures', 'rtfSimple.rtf' ) )
 ```
 
 ```javascript
-const rtfParse = require( 'rtf-parse' ),
-	path = require( 'path' );
+const rtfParse = require( 'rtf-parse' );
 
-rtfParse.parseString( '{\rtf1 foobar}' )
+rtfParse.parseString( '{\\rtf1 foobar}' )
 	.then( doc => {
 		// Do anything you like with rtf.model.Document instance of your document.
 	} );

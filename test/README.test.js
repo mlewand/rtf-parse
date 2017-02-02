@@ -14,7 +14,7 @@ describe( 'README.md examples', () => {
 
 
 	describe( 'parseString example', () => {
-		return rtfParse.parseString( '{\rtf1 foobar}' )
+		return rtfParse.parseString( '{\\rtf1 foobar}' )
 			.then( doc => {
 				// Do anything you like with rtf.model.Document instance of your document.
 				return doc;
