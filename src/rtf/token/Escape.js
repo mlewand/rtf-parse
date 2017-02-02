@@ -17,7 +17,6 @@
 		}
 
 		match( code ) {
-			//return super.super.match( code );
 			return Token.prototype.match.call( this, code );
 		}
 	}
