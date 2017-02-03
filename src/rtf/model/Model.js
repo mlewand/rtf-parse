@@ -50,23 +50,7 @@
 		 * @memberOf Model
 		 */
 		getChild( criteria, recursive ) {
-			let evaluator;
-
-			if ( !criteria ) {
-				evaluator = () => true;
-			} else if ( isClass( criteria ) ) {
-				evaluator = val => val instanceof criteria;
-			} else if ( typeof criteria === 'function' ) {
-				evaluator = criteria;
-			}
-
-			for ( let child of this._getChildren( this, recursive ) ) {
-				if ( evaluator( child ) === true ) {
-					return child;
-				}
-			}
-
-			return null;
+			return this._getChildren( this, criteria, recursive ).next().value || null;
 		}
 
 		/**
@@ -81,8 +65,34 @@
 		 * @memberOf Model
 		 */
 		getChildren( criteria, recursive ) {
-			let ret = [],
-				evaluator;
+			let ret = [];
+
+			for ( let child of this._getChildren( this, criteria, recursive ) ) {
+				ret.push( child );
+			}
+
+			return ret;
+		}
+
+		* _getChildren( parent, criteria, recursive ) {
+			let evaluator = this._getEvaluatorFromCriteria( criteria );
+
+			for ( let child of parent.children ) {
+				if ( evaluator( child ) === true ) {
+					yield child;
+				}
+				if ( recursive ) {
+					for ( let grandchildren of child.children ) {
+						if ( evaluator( grandchildren ) === true ) {
+							yield grandchildren;
+						}
+					}
+				}
+			}
+		}
+
+		_getEvaluatorFromCriteria( criteria ) {
+			let evaluator;
 
 			if ( !criteria ) {
 				evaluator = () => true;
@@ -92,24 +102,7 @@
 				evaluator = criteria;
 			}
 
-			for ( let child of this._getChildren( this, recursive ) ) {
-				if ( evaluator( child ) === true ) {
-					ret.push( child );
-				}
-			}
-
-			return ret;
-		}
-
-		* _getChildren( parent, recursive ) {
-			for ( let child of parent.children ) {
-				yield child;
-				if ( recursive ) {
-					for ( let grandchildren of child.children ) {
-						yield grandchildren;
-					}
-				}
-			}
+			return evaluator;
 		}
 	}
 
