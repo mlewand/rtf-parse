@@ -45,12 +45,12 @@
 		 *		curModel.getChild( Group );
 		 *
 		 * @param {Class/Function} [criteria] If no criteria is given the first child is returned.
+		 * @param {Boolean} [recursive=false]
 		 * @returns {Model}
 		 * @memberOf Model
 		 */
-		getChild( criteria ) {
-			let ret = null,
-				evaluator;
+		getChild( criteria, recursive ) {
+			let evaluator;
 
 			if ( !criteria ) {
 				evaluator = () => true;
@@ -60,7 +60,24 @@
 				evaluator = criteria;
 			}
 
-			return this.children.find( evaluator ) || null;
+			for ( let child of this._getChildren( this, recursive ) ) {
+				if ( evaluator( child ) === true ) {
+					return child;
+				}
+			}
+
+			return null;
+		}
+
+		* _getChildren( parent, recursive ) {
+			for ( let child of parent.children ) {
+				yield child;
+				if ( recursive ) {
+					for ( let grandchildren of child.children ) {
+						yield grandchildren;
+					}
+				}
+			}
 		}
 	}
 
