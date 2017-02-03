@@ -69,7 +69,7 @@
 		 *
 		 * @param {Class/Function} [criteria] If no criteria is given the first child is returned.
 		 * @param {Boolean} [recursive=false]
-		 * @returns {Model}
+		 * @returns {Model[]}
 		 * @memberOf Model
 		 */
 		getChildren( criteria, recursive ) {
