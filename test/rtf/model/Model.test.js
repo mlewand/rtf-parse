@@ -69,11 +69,20 @@ describe( 'Model', () => {
 	} );
 
 
-	describe( 'getChild', () => {
+	describe( 'traversing methods', () => {
 		let a = new ModelA(),
 			b = new ModelB(),
-			b2 = new ModelB();
-		b2.foo = true;
+			b2 = new ModelB(),
+			nestedModel = new ModelB(),
+			emptyMock = new Model();
+
+
+
+		before( () => {
+			b2.foo = true;
+			nestedModel.value = 'bom';
+			b.append( nestedModel );
+		} );
 
 		beforeEach( () => {
 			mock.append( a );
@@ -81,39 +90,61 @@ describe( 'Model', () => {
 			mock.append( b2 );
 		} );
 
+		describe( 'getChild', () => {
+			describe( 'regular', () => {
+				it( 'gives correct result no criteria is given', () => {
+					expect( mock.getChild() ).to.be.equal( a );
+				} );
 
-		describe( 'regular', () => {
-			it( 'returns first child when no criteria is given', () => {
-				expect( mock.getChild() ).to.be.equal( a );
+				it( 'returns correct val when no children available', () => {
+					expect( emptyMock.getChild() ).to.be.null;
+				} );
+
+				it( 'returns a correct val with a given type', () => {
+					expect( mock.getChild( ModelB ) ).to.be.equal( b );
+				} );
+
+				it( 'returns a correct val when given a function', () => {
+					expect( mock.getChild( model => model.foo && model.foo === true ) ).to.be.equal( b2 );
+				} );
 			} );
 
-			it( 'returns correct val when no children available', () => {
-				let emptyMock = new Model();
-				expect( emptyMock.getChild() ).to.be.null;
-			} );
-
-			it( 'returns a correct val with a given type', () => {
-				expect( mock.getChild( ModelB ) ).to.be.eql( b );
-			} );
-
-			it( 'returns a correct val when given a function', () => {
-				expect( mock.getChild( model => model.foo && model.foo === true ) ).to.be.eql( b2 );
+			describe( 'recursive', () => {
+				it( 'returns a correct val when given a function', () => {
+					expect( mock.getChild( model => model.value === 'bom', true ) ).to.be.equal( nestedModel );
+				} );
 			} );
 		} );
 
+		describe( 'getChildren', () => {
+			describe( 'regular', () => {
+				it( 'gives correct result no criteria is given', () => {
+					expect( mock.getChildren() ).to.be.eql( [ a, b, b2 ] );
+				} );
 
+				it( 'returns correct val when no children available', () => {
+					expect( emptyMock.getChildren() ).to.be.eql( [] );
+				} );
 
-		describe( 'recursive', () => {
-			nestedModel = new ModelB();
-			nestedModel.value = 'bom';
+				it( 'returns a correct val with a given type', () => {
+					expect( mock.getChildren( ModelB ) ).to.be.eql( [ b, b2 ] );
+				} );
 
-			beforeEach( () => {
-				b.append( nestedModel );
+				it( 'returns a correct val when given a function', () => {
+					expect( mock.getChildren( model => model.foo && model.foo === true ) ).to.be.eql( [ b2 ] );
+				} );
 			} );
 
-			it.only( 'returns a correct val when given a function', () => {
-				expect( mock.getChild( model => model.value === 'bom', true ) ).to.be.eql( nestedModel );
+			describe( 'recursive', () => {
+				it( 'returns a correct val when given a function', () => {
+					expect( mock.getChildren( model => model.value === 'bom', true ) ).to.be.eql( [ nestedModel ] );
+				} );
+
+				it( 'returns a correct val when given a class', () => {
+					expect( mock.getChildren( ModelB, true ) ).to.be.eql( [ b, nestedModel, b2 ] );
+				} );
 			} );
 		} );
 	} );
+
 } );

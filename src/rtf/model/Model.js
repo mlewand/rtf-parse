@@ -69,6 +69,38 @@
 			return null;
 		}
 
+		/**
+		 * Returns an array of children matching `criteria`.
+		 *
+		 *		// Returns a first child which is instance of Group.
+		 *		curModel.getChild( Group );
+		 *
+		 * @param {Class/Function} [criteria] If no criteria is given the first child is returned.
+		 * @param {Boolean} [recursive=false]
+		 * @returns {Model}
+		 * @memberOf Model
+		 */
+		getChildren( criteria, recursive ) {
+			let ret = [],
+				evaluator;
+
+			if ( !criteria ) {
+				evaluator = () => true;
+			} else if ( isClass( criteria ) ) {
+				evaluator = val => val instanceof criteria;
+			} else if ( typeof criteria === 'function' ) {
+				evaluator = criteria;
+			}
+
+			for ( let child of this._getChildren( this, recursive ) ) {
+				if ( evaluator( child ) === true ) {
+					ret.push( child );
+				}
+			}
+
+			return ret;
+		}
+
 		* _getChildren( parent, recursive ) {
 			for ( let child of parent.children ) {
 				yield child;
