@@ -74,6 +74,7 @@ describe( 'Model', () => {
 			b = new ModelB(),
 			b2 = new ModelB(),
 			nestedModel = new ModelB(),
+			deepNestedModel = new ModelA(),
 			emptyMock = new Model();
 
 
@@ -82,6 +83,8 @@ describe( 'Model', () => {
 			b2.foo = true;
 			nestedModel.value = 'bom';
 			b.append( nestedModel );
+			deepNestedModel.value = 'deep';
+			nestedModel.append( deepNestedModel );
 		} );
 
 		beforeEach( () => {
@@ -116,6 +119,10 @@ describe( 'Model', () => {
 			describe( 'recursive', () => {
 				it( 'returns a correct val when given a function', () => {
 					expect( mock.getChild( model => model.value === 'bom', true ) ).to.be.equal( nestedModel );
+				} );
+
+				it( 'returns deeply nested child', () => {
+					expect( mock.getChild( model => model.value === 'deep', true ) ).to.be.equal( deepNestedModel );
 				} );
 			} );
 		} );

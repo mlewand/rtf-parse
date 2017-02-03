@@ -90,11 +90,7 @@
 					yield child;
 				}
 				if ( recursive ) {
-					for ( let grandchildren of child.children ) {
-						if ( evaluator( grandchildren ) === true ) {
-							yield grandchildren;
-						}
-					}
+					yield * this._getChildren( child, criteria, recursive );
 				}
 			}
 		}
