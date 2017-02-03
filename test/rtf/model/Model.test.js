@@ -82,8 +82,6 @@ describe( 'Model', () => {
 		} );
 
 		it( 'returns first child when no criteria is given', () => {
-			console.log( '---' );
-			console.log( a );
 			expect( mock.getChild() ).to.be.equal( a );
 		} );
 
