@@ -93,5 +93,9 @@ describe( 'Model', () => {
 		it( 'returns a correct val with a given type', () => {
 			expect( mock.getChild( ModelB ) ).to.be.eql( b );
 		} );
+
+		it( 'returns a correct val when given a function', () => {
+			expect( mock.getChild( model => model.foo && model.foo === true ) ).to.be.eql( b2 );
+		} );
 	} );
 } );

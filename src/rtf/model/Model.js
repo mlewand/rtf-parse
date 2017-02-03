@@ -38,6 +38,16 @@
 			return this.children[ this.children.length - 1 ] || null;
 		}
 
+		/**
+		 * Returns the first child matching `criteria`.
+		 *
+		 *		// Returns a first child which is instance of Group.
+		 *		curModel.getChild( Group );
+		 *
+		 * @param {Class/Function} [criteria] If no criteria is given the first child is returned.
+		 * @returns {Model}
+		 * @memberOf Model
+		 */
 		getChild( criteria ) {
 			let ret = null,
 				evaluator;
@@ -46,6 +56,8 @@
 				evaluator = () => true;
 			} else if ( isClass( criteria ) ) {
 				evaluator = val => val instanceof criteria;
+			} else if ( typeof criteria === 'function' ) {
+				evaluator = criteria;
 			}
 
 			return this.children.find( evaluator ) || null;
