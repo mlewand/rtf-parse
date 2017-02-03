@@ -100,6 +100,10 @@ describe( 'Model', () => {
 					expect( emptyMock.getChild() ).to.be.null;
 				} );
 
+				it( 'returns correct val when invalid argument given', () => {
+					expect( mock.getChild( { aa: 1 } ) ).to.be.null;
+				} );
+
 				it( 'returns a correct val with a given type', () => {
 					expect( mock.getChild( ModelB ) ).to.be.equal( b );
 				} );
@@ -142,6 +146,10 @@ describe( 'Model', () => {
 
 				it( 'returns a correct val when given a class', () => {
 					expect( mock.getChildren( ModelB, true ) ).to.be.eql( [ b, nestedModel, b2 ] );
+				} );
+
+				it( 'returns a correct val when given a function but no match', () => {
+					expect( mock.getChild( model => false, true ) ).to.be.null;
 				} );
 			} );
 		} );

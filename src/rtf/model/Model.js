@@ -108,6 +108,8 @@
 				evaluator = val => val instanceof criteria;
 			} else if ( typeof criteria === 'function' ) {
 				evaluator = criteria;
+			} else {
+				evaluator = () => false;
 			}
 
 			return evaluator;
