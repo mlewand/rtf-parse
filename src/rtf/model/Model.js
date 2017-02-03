@@ -39,6 +39,14 @@
 		}
 
 		/**
+		 * @returns {Model/null} Returns last child of this item or `null` if none.
+		 * @memberOf Model
+		 */
+		getFirst() {
+			return this.getChild();
+		}
+
+		/**
 		 * Returns the first child matching `criteria`.
 		 *
 		 *		// Returns a first child which is instance of Group.

@@ -145,6 +145,19 @@ describe( 'Model', () => {
 				} );
 			} );
 		} );
+
+
+		describe( 'getFirst', () => {
+			it( 'returns correct val for non empty', () => {
+				expect( mock.getFirst() ).to.be.equal( a );
+
+			} );
+
+			it( 'returns correct val for empty', () => {
+				expect( emptyMock.getFirst() ).to.be.null;
+			} );
+		} );
+
 	} );
 
 } );
