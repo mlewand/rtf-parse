@@ -57,6 +57,15 @@ describe( 'Model', () => {
 		} );
 	} );
 
+	describe( 'getParent', () => {
+		it( 'returns the parent', () => {
+			mock._parent = 1;
+			expect( mock.getParent() ).to.be.equal( 1 );
+			mock._parent = 2;
+			expect( mock.getParent() ).to.be.equal( 2 );
+		} );
+	} );
+
 	describe( 'getLast', () => {
 		it( 'returns null if none available', () => {
 			expect( mock.getLast() ).to.be.null;
@@ -104,7 +113,9 @@ describe( 'Model', () => {
 				} );
 
 				it( 'returns correct val when invalid argument given', () => {
-					expect( mock.getChild( { aa: 1 } ) ).to.be.null;
+					expect( mock.getChild( {
+						aa: 1
+					} ) ).to.be.null;
 				} );
 
 				it( 'returns a correct val with a given type', () => {

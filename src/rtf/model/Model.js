@@ -30,6 +30,10 @@
 			this._parent = parent;
 		}
 
+		getParent() {
+			return this._parent;
+		}
+
 		/**
 		 * @returns {Model/null} Returns last child of this item or `null` if none.
 		 * @memberOf Model
