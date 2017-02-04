@@ -17,7 +17,7 @@
 
 		set value( val ) {
 			this._value = val;
-			this.name = this._resolveName( val );
+			this.name = Command._resolveName( val );
 		}
 
 		get value() {
@@ -29,14 +29,44 @@
 		 *
 		 * E.g. for `"\foobar "` token it would return `"foobar"` string.
 		 *
+		 * @private
 		 * @param {String} value Text value picked by parser.
 		 * @returns {String/null}
 		 * @memberOf Command
 		 */
-		_resolveName( value ) {
+		static _resolveName( value ) {
 			let match = value.match( /\\([a-z]+(-?[0-9]+)?) ?/ );
 
 			return match ? match[ 1 ] : null;
+		}
+
+		/**
+		 * A factory for commands. Based on parsed command string it will return the most
+		 * accurate command instance.
+		 *
+		 * If no specific class is found for given `value`, a Command instance is returned.
+		 *
+		 * E.g. it will return `Picture` instance for `\pict` command.
+		 *
+		 * @static
+		 * @param {String} value Command string picked by the parser, e.g. `\pict`.
+		 * @returns {Command}
+		 * @memberOf Command
+		 */
+		static factory( value ) {
+			const Picture = require( './command/Picture' );
+
+			let name = Command._resolveName( value ),
+				mapping = {
+					'pict': Picture
+				},
+				type = name in mapping ? mapping[ name ] : Command,
+				ret;
+
+			ret = new type( value );
+			ret.value = value;
+
+			return ret;
 		}
 	}
 
