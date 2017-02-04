@@ -14,9 +14,7 @@
 		}
 
 		applyToModel( model ) {
-			let cmd = new CommandModel( model );
-			cmd.value = this.value;
-			model.append( cmd );
+			model.append( CommandModel.factory( this.value ) );
 		}
 	}
 
