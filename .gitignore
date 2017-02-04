@@ -1,3 +1,6 @@
 node_modules
 coverage
 yarn.lock
+examples/_output/*.png
+examples/_output/*.jpg
+examples/_output/*.bmp
