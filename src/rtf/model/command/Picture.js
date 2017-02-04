@@ -5,6 +5,12 @@
 		Text = require( '../Text' );
 
 	class Picture extends Command {
+		/**
+		 * Returns a buffer containing the image.
+		 *
+		 * @returns {Buffer}
+		 * @memberOf Picture
+		 */
 		getPicture() {
 			var input = this._getImageText(),
 				inputLen = input.length,
