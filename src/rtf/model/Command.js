@@ -17,7 +17,7 @@
 
 		set value( val ) {
 			this._value = val;
-			this.name = this._resolveName( val );
+			this.name = Command._resolveName( val ) || '';
 		}
 
 		get value() {
@@ -29,11 +29,12 @@
 		 *
 		 * E.g. for `"\foobar "` token it would return `"foobar"` string.
 		 *
+		 * @private
 		 * @param {String} value Text value picked by parser.
 		 * @returns {String/null}
 		 * @memberOf Command
 		 */
-		_resolveName( value ) {
+		static _resolveName( value ) {
 			let match = value.match( /\\([a-z]+(-?[0-9]+)?) ?/ );
 
 			return match ? match[ 1 ] : null;

@@ -40,4 +40,23 @@ describe( 'Parser integration', () => {
 				expect( group.children[ 0 ].value ).to.be.equal( 'two  lines' );
 			} );
 	} );
+
+
+	describe( 'pictures', () => {
+		const PictureModel = require( '../src/rtf/model/command/Picture' );
+
+		it( 'find images', () => {
+			return parserMock.parseFile( path.join( __dirname, '_fixtures', 'extractedPngPicture.rtf' ) )
+				.then( doc => {
+					expect( doc.getChild( PictureModel, true ) ).to.be.an.instanceOf( PictureModel );
+				} );
+		} );
+
+		it( 'doesnt show images in nonshppict', () => {
+			return parserMock.parseFile( path.join( __dirname, '_fixtures', 'extractedNonshppict.rtf' ) )
+				.then( doc => {
+					expect( doc.getChild( PictureModel, true ) ).to.be.null;
+				} );
+		} );
+	} );
 } );
