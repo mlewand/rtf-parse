@@ -31,6 +31,12 @@
 		 * @memberOf Picture
 		 */
 		getType() {
+			let blip = this.getParent().getChild( child => child instanceof Command && child.name.endsWith( 'blip' ) );
+
+			if ( blip ) {
+				return 'image/' + blip.name.replace( 'blip', '' );
+			}
+
 			return 'image/bmp';
 		}
 
