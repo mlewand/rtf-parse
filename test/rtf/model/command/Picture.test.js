@@ -12,28 +12,29 @@ const SAMPLE_IMAGE = '0100090000036e00000000004500000000000400000003010800050000
 	fixturesPath = path.join( __dirname, '..', '..', '..', '_fixtures' );
 
 describe( 'Picture', () => {
-	// Unfortunately to Picture conveniently we need to parse strings, so it's more of an integration test.
-	let parse = rtfString => {
-			return rtfParse.parseString( rtfString )
-				.then( doc => doc.getChild( Picture, true ) );
-		},
-		mock;
+	let parentGroup = new Group(),
+		mock = new Picture(),
+		text = new Text();
 
-	before( () => {
-		return parse( '{\\*\\shppict {\\pict {}' + SAMPLE_IMAGE + '}}' )
-			.then( pic => {
-				mock = pic;
-			} );
-	} );
+	parentGroup.append( mock );
+
+	// Set the "stringified blob" of an image.
+	text.value = SAMPLE_IMAGE;
+	parentGroup.append( text );
 
 	describe( 'getType', () => {
+		// Unfortunately to test it conveniently we need to parse strings, so it's more of an integration test.
+		let parse = rtfString => {
+			return rtfParse.parseString( rtfString )
+				.then( doc => doc.getChild( Picture, true ) );
+		}
+
 		it( 'returns correct type', () => {
-			console.log( 'asserting' );
 			expect( mock.getType() ).to.be.a( 'string' );
 		} );
 
 		it( 'defaults to a correct value', () => {
-			return parse( '{\\*\\shppict {\\pict {}}}' )
+			return parse( '{\\pict {}}' )
 				.then( pict => {
 					expect( pict.getType() ).to.be.equal( 'image/bmp' );
 				} );
@@ -48,9 +49,9 @@ describe( 'Picture', () => {
 		} );
 
 		it( 'detects jpg files', () => {
-			return parse( '{\\*\\shppict {\\pict\\picscalex32\\picscaley32\\piccropl0\\piccropr0\\piccropt0' +
-					'\\piccropb0\\picw50800\\pich34581\\picwgoal28800\\pichgoal19605\\jpegblip\\bliptag-2021094954' +
-					'{\\*\\blipuid 878889d6ffafd084e3430f9960d44e4c}}' )
+			return parse( '{\\pict\\picscalex32\\picscaley32\\piccropl0\\piccropr0\\piccropt0\\piccropb0' +
+				'\\picw50800\\pich34581\\picwgoal28800\\pichgoal19605\\jpegblip\\bliptag-2021094954' +
+				'{\\*\\blipuid 878889d6ffafd084e3430f9960d44e4c}}' )
 				.then( pict => {
 					expect( pict.getType() ).to.be.equal( 'image/jpeg' );
 				} );

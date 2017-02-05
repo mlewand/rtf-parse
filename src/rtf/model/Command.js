@@ -58,7 +58,7 @@
 
 			let name = Command._resolveName( value ),
 				mapping = {
-					'shppict': Picture
+					'pict': Picture
 				},
 				type = name in mapping ? mapping[ name ] : Command,
 				ret;

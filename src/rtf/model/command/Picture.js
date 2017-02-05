@@ -8,9 +8,6 @@
 		/**
 		 * Returns a buffer containing the image.
 		 *
-		 * Implementation note: Picture type hooks to `\shppict` cmd rather than `\pict` in order to
-		 * avoid being constructed for `\nonshppict` (deprecated) command.
-		 *
 		 * @returns {Buffer}
 		 * @memberOf Picture
 		 */
@@ -34,7 +31,7 @@
 		 * @memberOf Picture
 		 */
 		getType() {
-			let blip = this._getPict().getParent().getChild( child => child instanceof Command && child.name.endsWith( 'blip' ) );
+			let blip = this.getParent().getChild( child => child instanceof Command && child.name.endsWith( 'blip' ) );
 
 			if ( blip ) {
 				return 'image/' + blip.name.replace( 'blip', '' );
@@ -44,18 +41,7 @@
 		}
 
 		_getImageText() {
-			return this._getPict().getParent().getChild( Text ).value;
-		}
-
-		/**
-		 * Returns an object representing `\pict` command within current `\shppict` group.
-		 *
-		 * @private
-		 * @returns {Command}
-		 * @memberOf Picture
-		 */
-		_getPict() {
-			return this.getParent().getChild( child => child instanceof Command && child.name === 'pict', true );
+			return this.getParent().getChild( Text ).value;
 		}
 	}
 
