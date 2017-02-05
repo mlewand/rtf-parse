@@ -27,7 +27,7 @@ describe( 'Picture', () => {
 		let parse = rtfString => {
 			return rtfParse.parseString( rtfString )
 				.then( doc => doc.getChild( Picture, true ) );
-		}
+		};
 
 		it( 'returns correct type', () => {
 			expect( mock.getType() ).to.be.a( 'string' );
@@ -50,8 +50,8 @@ describe( 'Picture', () => {
 
 		it( 'detects jpg files', () => {
 			return parse( '{\\pict\\picscalex32\\picscaley32\\piccropl0\\piccropr0\\piccropt0\\piccropb0' +
-				'\\picw50800\\pich34581\\picwgoal28800\\pichgoal19605\\jpegblip\\bliptag-2021094954' +
-				'{\\*\\blipuid 878889d6ffafd084e3430f9960d44e4c}}' )
+					'\\picw50800\\pich34581\\picwgoal28800\\pichgoal19605\\jpegblip\\bliptag-2021094954' +
+					'{\\*\\blipuid 878889d6ffafd084e3430f9960d44e4c}}' )
 				.then( pict => {
 					expect( pict.getType() ).to.be.equal( 'image/jpeg' );
 				} );

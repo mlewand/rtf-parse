@@ -114,12 +114,14 @@
 		_loadTokens() {
 			const Group = require( './rtf/token/Group' ),
 				GroupEnd = require( './rtf/token/GroupEnd' ),
+				Picture = require( './rtf/token/command/Picture' ),
 				Command = require( './rtf/token/Command' ),
 				Escape = require( './rtf/token/Escape' );
 
 			this.tokens = [
 				new Group(),
 				new GroupEnd(),
+				new Picture(),
 				new Command()
 			];
 

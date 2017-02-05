@@ -28,9 +28,5 @@ describe( 'Command', () => {
 
 
 	describe( 'factory', () => {
-		it( 'returns a different command type if possible', () => {
-			const Picture = require( '../../../src/rtf/model/command/Picture' );
-			expect( Command.factory( '\\pict ' ) ).to.be.instanceOf( Picture );
-		} );
 	} );
 } );
