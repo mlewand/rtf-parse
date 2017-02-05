@@ -25,8 +25,4 @@ describe( 'Command', () => {
 
 		} );
 	} );
-
-
-	describe( 'factory', () => {
-	} );
 } );
