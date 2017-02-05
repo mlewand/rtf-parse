@@ -23,7 +23,9 @@ parser.parseFile( rtfPath )
 	} )
 	.then( pics => {
 		// Save each picture as a file in the output directory.
-		return Promise.all( pics.map( ( pict, index ) =>
-			fsp.writeFile( `_output/img${index}.png`, pict.getPicture() ) ) );
+		return Promise.all( pics.map( ( pict, index ) => {
+			let extension = pict.getType().split( '/' )[ 1 ];
+			return fsp.writeFile( `_output/img${index}.${extension}`, pict.getPicture() );
+		} ) );
 	} )
 	.then( () => console.log( 'And I\'m done!' ) );
