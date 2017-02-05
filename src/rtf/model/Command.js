@@ -17,7 +17,7 @@
 
 		set value( val ) {
 			this._value = val;
-			this.name = Command._resolveName( val );
+			this.name = Command._resolveName( val ) || '';
 		}
 
 		get value() {
