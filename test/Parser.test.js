@@ -57,24 +57,24 @@ describe( 'Parser', () => {
 	} );
 
 
-	describe( 'parseFile', () => {
-		it( 'returns a promise', () => {
-			expect( parserMock.parseFile( simpleFixturePath ) ).to.be.instanceof( Promise );
-		} );
+	// describe( 'parseFile', () => {
+	// 	it( 'returns a promise', () => {
+	// 		expect( parserMock.parseFile( simpleFixturePath ) ).to.be.instanceof( Promise );
+	// 	} );
 
-		it( 'resolves simple rtf', () => {
-			let parseStringSpy = sinon.spy( parserMock, 'parseString' );
+	// 	it( 'resolves simple rtf', () => {
+	// 		let parseStringSpy = sinon.spy( parserMock, 'parseString' );
 
-			return parserMock.parseFile( simpleFixturePath )
-				.then( doc => {
-					expect( doc ).to.be.instanceof( DocumentModel );
-					expect( parseStringSpy ).to.be.called;
-					parseStringSpy.restore();
-				} )
-				.catch( err => {
-					parseStringSpy.restore();
-					throw err;
-				} );
-		} );
-	} );
+	// 		return parserMock.parseFile( simpleFixturePath )
+	// 			.then( doc => {
+	// 				expect( doc ).to.be.instanceof( DocumentModel );
+	// 				expect( parseStringSpy ).to.be.called;
+	// 				parseStringSpy.restore();
+	// 			} )
+	// 			.catch( err => {
+	// 				parseStringSpy.restore();
+	// 				throw err;
+	// 			} );
+	// 	} );
+	// } );
 } );

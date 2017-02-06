@@ -11,22 +11,27 @@ $ npm install --save rtf-parse
 ## Usage examples
 
 ```javascript
-const rtfParse = require( 'rtf-parse' ),
-	path = require( 'path' );
-
-rtfParse.parseFile( path.join( '_fixtures', 'rtfSimple.rtf' ) )
-	.then( doc => {
-		// Do anything you like with rtf.model.Document instance of your document.
-	} );
-```
-
-```javascript
 const rtfParse = require( 'rtf-parse' );
 
 rtfParse.parseString( '{\\rtf1 foobar}' )
 	.then( doc => {
 		// Do anything you like with rtf.model.Document instance of your document.
 	} );
+```
+
+```javascript
+const rtfParse = require( 'rtf-parse' ),
+	path = require( 'path' ),
+	fsp = require( 'fs-promise' );
+
+fsp.readFile( path.join( '_fixtures', 'rtfSimple.rtf' ), {
+		encoding: 'utf-8'
+	} )
+	.then( content => parserMock.parseString( content ) )
+	.then( doc => {
+		// Do anything you like with rtf.model.Document instance of your document.
+		return doc;
+	} )
 ```
 
 You can find more usage examples in [examples](examples) directory.

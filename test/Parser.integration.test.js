@@ -46,14 +46,20 @@ describe( 'Parser integration', () => {
 		const PictureModel = require( '../src/rtf/model/command/Picture' );
 
 		it( 'find images', () => {
-			return parserMock.parseFile( path.join( __dirname, '_fixtures', 'extractedPngPicture.rtf' ) )
+			return fsp.readFile( path.join( __dirname, '_fixtures', 'extractedPngPicture.rtf' ), {
+					encoding: 'utf-8'
+				} )
+				.then( content => parserMock.parseString( content ) )
 				.then( doc => {
 					expect( doc.getChild( PictureModel, true ) ).to.be.an.instanceOf( PictureModel );
 				} );
 		} );
 
 		it( 'doesnt show images in nonshppict', () => {
-			return parserMock.parseFile( path.join( __dirname, '_fixtures', 'extractedNonshppict.rtf' ) )
+			return fsp.readFile( path.join( __dirname, '_fixtures', 'extractedNonshppict.rtf' ), {
+					encoding: 'utf-8'
+				} )
+				.then( content => parserMock.parseString( content ) )
 				.then( doc => {
 					expect( doc.getChild( PictureModel, true ) ).to.be.null;
 				} );

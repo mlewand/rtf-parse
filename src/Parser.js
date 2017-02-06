@@ -3,8 +3,7 @@
 
 	const Document = require( './rtf/model/Document' ),
 		Tokenizer = require( './Tokenizer' ),
-		EventEmmiter = require( 'events' ),
-		fsp = require( 'fs-promise' );
+		EventEmmiter = require( 'events' );
 
 	class Parser extends EventEmmiter {
 		parseString( str ) {
@@ -28,12 +27,12 @@
 		 * @returns {Promise<Document>}
 		 * @memberOf Parser
 		 */
-		parseFile( path ) {
-			return fsp.readFile( path, {
-					encoding: 'utf-8'
-				} )
-				.then( content => this.parseString( content ) );
-		}
+		// parseFile( path ) {
+		// 	return require( 'fs-promise' ).readFile( path, {
+		// 			encoding: 'utf-8'
+		// 		} )
+		// 		.then( content => this.parseString( content ) );
+		// }
 
 		_tokenMatched( token, currentContext ) {
 			let targetContext = token.applyToModel( currentContext ) || currentContext;
