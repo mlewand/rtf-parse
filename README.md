@@ -29,6 +29,10 @@ rtfParse.parseString( '{\\rtf1 foobar}' )
 	} );
 ```
 
+You can find more usage examples in [examples](examples) directory.
+
+Also you could also browse tests to see how the API is used.
+
 ## License
 
 MIT © Marek Lewandowski
