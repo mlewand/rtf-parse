@@ -1,9 +1,6 @@
 const path = require( 'path' ),
 	fsp = require( 'fs-promise' ),
-	parser = require( '../src' ),
-	CommandModel = require( '../src/rtf/model/Command' ),
-	PictureModel = require( '../src/rtf/model/command/Picture' ),
-	TextModel = require( '../src/rtf/model/Text' );
+	parser = require( '../src' );
 
 // This example shows how to traverse the document, and work with pictures.
 // It's loading RTF file pointed by `rtfPath` and saves each image to `outputPath` directory.
@@ -15,7 +12,7 @@ parser.parseFile( rtfPath )
 	.then( doc => {
 		// File parsed, doc is a Document instance.
 		// Now get all the picture instances:
-		let pics = doc.getChildren( PictureModel, true );
+		let pics = doc.getChildren( parser.model.command.Picture, true );
 
 		console.log( `Found ${pics.length} pictures, saving to ${ouputPath} directory...` );
 
