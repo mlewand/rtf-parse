@@ -27,6 +27,24 @@
 		}
 
 		/**
+		 * Browser-friendly version of {@link #getPicture}.
+		 *
+		 * @returns {String} Returns picture data as a string.
+		 * @memberOf Picture
+		 */
+		getPictureAsString() {
+			var input = this._getImageText(),
+				inputLen = input.length,
+				ret = '',
+				i;
+
+			for ( i = 0; i < inputLen; i += 2 ) {
+				ret += String.fromCharCode( parseInt( input.substr( i, 2 ), 16 ) );
+			}
+			return ret;
+		}
+
+		/**
 		 * @returns {String} Mime type of the image, e.g. `image/png`.
 		 * @memberOf Picture
 		 */
