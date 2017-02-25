@@ -1,0 +1,14 @@
+
+install:
+  - ps: Install-Product node 6.6.0 x64
+  - npm install -g npm gulp-cli --silent
+  - npm install --silent
+
+platform:
+  - x86
+  - x64
+
+test_script:
+  - node --version
+  - npm --version
+  - gulp test
