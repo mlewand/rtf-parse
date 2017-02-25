@@ -1,5 +1,7 @@
 # rtf-parse
 
+[![Build status](https://ci.appveyor.com/api/projects/status/7xq8eq2lil4g2t8j?svg=true&passingText=master%20%E2%9C%93)](https://ci.appveyor.com/project/mlewand/rtf-parse)
+
 > A simplified RTF parser.
 
 ## Installation
