@@ -1,4 +1,16 @@
 language: node_js
+
 node_js:
+  - "node"
   - v7
   - v6
+
+os:
+  - osx
+  - linux
+
+install:
+  - npm install -g npm gulp-cli --silent --quiet
+  - npm install --silent --quiet
+script:
+  - gulp test
