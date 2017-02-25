@@ -66,7 +66,16 @@ describe( 'Picture', () => {
 			expect( imageBytes[ 0 ], 'byte at 0 offset' ).to.be.eql( 1 );
 			expect( imageBytes[ 1 ], 'byte at 1 offset' ).to.be.eql( 0 );
 		} );
+	} );
 
+	describe( 'getPictureAsString', () => {
+		it( 'works', () => {
+			let stringified = mock.getPictureAsString();
+
+			expect( stringified[ 2 ] ).to.be.equal( '\t', '2nd character value' );
+			expect( stringified[ 6 ] ).to.be.equal( 'n', '6th character value' );
+			expect( stringified[ 12 ] ).to.be.equal( 'E', '12th character value' );
+		} );
 	} );
 
 	describe( '_getImageText', () => {
