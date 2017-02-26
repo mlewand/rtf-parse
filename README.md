@@ -41,6 +41,14 @@ You can find more usage examples in [examples](examples) directory.
 
 Also you could also browse tests to see how the API is used.
 
+## Contribute
+
+This is fully open source pet project, if you feel you're in a mood for a pull request, you're more than welcome to do so!
+
+### Getting In Touch
+
+You can always ping me at Twitter [@m_lewand](https://twitter.com/m_lewand).
+
 ## License
 
 MIT © Marek Lewandowski
