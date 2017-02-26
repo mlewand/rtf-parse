@@ -1,7 +1,7 @@
 
 install:
   - ps: Install-Product node 6.6.0 x64
-  - npm install -g npm gulp-cli --silent --quiet
+  - npm install -g npm gulp-cli codecov --silent --quiet
   - npm install --silent --quiet
 
 platform:

@@ -12,7 +12,8 @@ os:
   - linux
 
 install:
-  - npm install -g npm gulp-cli --silent --quiet
+  - npm install -g npm gulp-cli codecov --silent --quiet
   - npm install --silent --quiet
 script:
   - gulp test
+  - codecov
