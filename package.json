@@ -44,7 +44,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "fs-promise": "^1.0.0",
+    "fs-promise": "^2.0.0",
     "is-class": "^0.0.4"
   }
 }
