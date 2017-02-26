@@ -1,6 +1,8 @@
 # rtf-parse
 
-[![Build status](https://ci.appveyor.com/api/projects/status/7xq8eq2lil4g2t8j?svg=true&passingText=master%20%E2%9C%93)](https://ci.appveyor.com/project/mlewand/rtf-parse) [![Build Status](https://travis-ci.org/mlewand/rtf-parse.svg?branch=master)](https://travis-ci.org/mlewand/rtf-parse)
+[![Build status](https://ci.appveyor.com/api/projects/status/7xq8eq2lil4g2t8j?svg=true&passingText=master%20%E2%9C%93)](https://ci.appveyor.com/project/mlewand/rtf-parse)
+[![Build Status](https://travis-ci.org/mlewand/rtf-parse.svg?branch=master)](https://travis-ci.org/mlewand/rtf-parse)
+[![codecov](https://codecov.io/gh/mlewand/rtf-parse/branch/master/graph/badge.svg)](https://codecov.io/gh/mlewand/rtf-parse)
 
 > A simplified RTF parser.
 
