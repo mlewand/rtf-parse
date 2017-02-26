@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/mlewand/rtf-parse/branch/master/graph/badge.svg)](https://codecov.io/gh/mlewand/rtf-parse)
 [![Dependency Status](https://david-dm.org/mlewand/rtf-parse/status.svg)](https://david-dm.org/mlewand/rtf-parse)
 [![GitHub issues](https://img.shields.io/github/issues/mlewand/rtf-parse.svg)](https://github.com/mlewand/rtf-parse/issues)
-[![GitHub closed issues](https://img.shields.io/github/mlewand/rtf-parse/shields.svg)](https://github.com/mlewand/rtf-parse/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/mlewand/rtf-parse.svg)](https://github.com/mlewand/rtf-parse/issues)
 
 > A simplified RTF parser.
 
