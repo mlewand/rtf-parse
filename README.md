@@ -1,8 +1,12 @@
 # rtf-parse
 
+[![GitHub version](https://badge.fury.io/gh/mlewand%2Frtf-parse.svg)](https://badge.fury.io/gh/mlewand%2Frtf-parse)
 [![Build status](https://ci.appveyor.com/api/projects/status/7xq8eq2lil4g2t8j?svg=true&passingText=master%20%E2%9C%93)](https://ci.appveyor.com/project/mlewand/rtf-parse)
 [![Build Status](https://travis-ci.org/mlewand/rtf-parse.svg?branch=master)](https://travis-ci.org/mlewand/rtf-parse)
 [![codecov](https://codecov.io/gh/mlewand/rtf-parse/branch/master/graph/badge.svg)](https://codecov.io/gh/mlewand/rtf-parse)
+[![Dependency Status](https://david-dm.org/mlewand/rtf-parse/status.svg)](https://david-dm.org/mlewand/rtf-parse)
+[![GitHub issues](https://img.shields.io/github/issues/mlewand/rtf-parse.svg)](https://github.com/mlewand/rtf-parse/issues)
+[![GitHub closed issues](https://img.shields.io/github/mlewand/rtf-parse/shields.svg)](https://github.com/mlewand/rtf-parse/issues)
 
 > A simplified RTF parser.
 
