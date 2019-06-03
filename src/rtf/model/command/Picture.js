@@ -14,7 +14,7 @@
 		getPicture() {
 			var input = this._getImageText(),
 				inputLen = input.length,
-				buffer = Buffer.alloc( inputLen / 2 );
+				buffer = Buffer.alloc( Math.ceil( inputLen / 2 ) );
 
 			for ( var i = 0; i < inputLen; i += 2 ) {
 				buffer.writeUInt8(
